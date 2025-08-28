@@ -120,7 +120,6 @@ By default, work-stealing is enabled:
 ```bash
 -DENABLE_STEALING=ON
 ```
-Perfect! Here's a polished, ready-to-copy Markdown snippet with inline ASCII-style graphs and clear explanations for your README. It’s designed to be impressive for a portfolio:
 
 ## Benchmark Results
 
