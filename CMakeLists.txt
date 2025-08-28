@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(TaskDispatcher LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # -------------------------------------------------------------------
@@ -10,6 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_TESTING_MODE "Enable testing mode (GoogleTest + TESTING defines)" OFF)
 option(ENABLE_STEALING "Enable stealing in Worker" ON)
 option(BUILD_BENCHMARK "Turn on to build benchmarks" ON)
+
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable Google Benchmark tests" FORCE)
+
 
 if(ENABLE_STEALING)
     add_compile_definitions(STEALING)
@@ -33,11 +36,14 @@ file(GLOB_RECURSE SOURCES
 add_library(TaskDispatcherLib ${SOURCES})
 target_include_directories(TaskDispatcherLib PUBLIC src)
 
+if(BUILD_BENCHMARK OR BUILD_TESTING_MODE)
+    include(FetchContent)
+endif()
+
 # -------------------------------------------------------------------
 # Tests
 # -------------------------------------------------------------------
 if(BUILD_TESTING_MODE)
-    include(FetchContent)
 
     FetchContent_Declare(
       googletest

@@ -19,6 +19,7 @@ protected:
         worker.execute();
 
         worker.join();
+        worker.join();
 
         EXPECT_EQ(counter.load(), tasks);
     }
@@ -32,5 +33,5 @@ TEST_P(WorkerTest, AllTasksExecuted) {
 INSTANTIATE_TEST_SUITE_P(
     ThreadCounts,
     WorkerTest,
-    ::testing::Values(1)
+    ::testing::Values(1, 2, 4, 8, 16)
 );
