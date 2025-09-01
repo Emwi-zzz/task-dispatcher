@@ -15,11 +15,13 @@ protected:
             worker.push([&counter, i]() { counter.fetch_add(1, std::memory_order_relaxed); std::cout << "Task executed" << i << "\n"; });
         }
 
+        worker.join(); // Check that join before execute is safe
+
 
         worker.execute();
 
-        worker.join();
-        worker.join();
+        worker.join(); // Ensure all tasks are completed
+        worker.join(); // Safe to call multiple times
 
         EXPECT_EQ(counter.load(), tasks);
     }

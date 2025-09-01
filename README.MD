@@ -66,7 +66,7 @@ int main() {
 
 ### Tips & Notes
 
-- `.join()` can be called multiple times. It safely waits even if some threads are not currently running, but cannot be used before first `.execute()`
+- `.join()` can be called multiple times. It safely waits even if some threads are not currently running
 - Make sure you've called `.join()`. before calling `.execute()` for second time on the same object
 - For advanced task scheduling, you can use **two instances of Worker**:
   - One for **pushing tasks**.

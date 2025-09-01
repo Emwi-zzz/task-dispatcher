@@ -48,7 +48,7 @@ void Worker::execute() {
 }
 
 void Worker::join() {
-    for(int i = 0; i < threads_number; i++){
+    for(int i = 0; i < threads.size(); i++){
         if (threads[i].joinable()){
             threads[i].join();
         }
